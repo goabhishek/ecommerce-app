@@ -1,10 +1,12 @@
 import { Grid } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getFilteredPhones } from "../selectors/phones";
+import homeStyle from "./homeStyle";
 import PhoneGridItem from "./PhoneGridItem";
 
-const PhoneGrid = () => {
+const PhoneGrid = ({classes}) => {
   const filteredPhones = useSelector(getFilteredPhones);
   // Set pagination and limit phones 12 per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,16 +39,17 @@ const PhoneGrid = () => {
     <Fragment>
       <Grid container className="phone-grid" spacing={1}>
         {currentPhones.map((phone) => (
-          <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>
+          <Grid item xl={3} lg={3} md={4} sm={6} xs={12}>
             <PhoneGridItem phone={phone} key={phone.id} />
           </Grid>
         ))}
       </Grid>
       <div className="pagination">
-        <ul>
+        <ul className={classes.ul}>
           {filteredPhones.length > 12
             ? pageNumbers.map((number) => (
                 <li
+                  style={{listStyle:'none',background:'blue',display:'inline',marginLeft:'2%',color:'white',padding:'5px',borderRadius:'5%',cursor:'pointer'}}
                   className={currentPage === number ? "active" : ""}
                   key={number}
                   onClick={() => paginate(number)}
@@ -62,4 +65,4 @@ const PhoneGrid = () => {
   );
 };
 
-export default PhoneGrid;
+export default withStyles(homeStyle)(PhoneGrid);

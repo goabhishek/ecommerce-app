@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 const phonesDefaultState = {
   phones: [
     {
-      id: uuidv4(),
+      id:"905bd8f6-cb0e-4e43-975d-4608b28eac79",
       brand: "Xiaomi",
       name: `Redmi 7`,
       price: 130,

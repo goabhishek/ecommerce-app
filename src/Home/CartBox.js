@@ -1,7 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearFilters } from "../actions/filters";
 import { getCartState, getCartTotal } from "../selectors/phones";
 // import Cart from "../c";
 
@@ -15,18 +14,23 @@ const CartBox = () => {
     .reduce((item, total) => item + total, 0);
 
   return (
-    <Fragment>
+    <div
+      style={{ color: "color", backgroundColor: "lightGreen", padding: "8px" }}
+    >
       <Link
         to="/cart"
         className="cart-box"
-        onClick={() => dispatch(clearFilters())}
+        style={{
+          textDecoration: "none",
+          color: "blue",
+        }}
       >
         {/* <Cart height="30" width="30" color="white" /> */}
         <p>
           {itemQuantity} items in cart {total}$
         </p>
       </Link>
-    </Fragment>
+    </div>
   );
 };
 

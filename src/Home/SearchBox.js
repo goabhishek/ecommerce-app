@@ -1,4 +1,4 @@
-import { Paper, TextField, Typography } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTextFilter } from "../actions/filters";
@@ -15,7 +15,7 @@ const SearchBox = () => {
   };
 
   return (
-    <Paper className="search-box">
+    <div className="search-box">
       <CartBox />
       <Typography variant="subtitle1">Search Phones</Typography>
       <TextField
@@ -26,7 +26,7 @@ const SearchBox = () => {
         value={inputValue}
         onChange={searchPhone}
       />
-    </Paper>
+    </div>
   );
 };
 

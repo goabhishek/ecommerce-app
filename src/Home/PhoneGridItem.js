@@ -1,16 +1,23 @@
 import { Button, Paper, Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearFilters } from "../actions/filters";
-import AddToCart from "../Cart/AddToCart";
+import { addToCart } from "../actions/phones";
 import phoneImg from "../product-2.png";
+import homeStyle from "./homeStyle";
 
-const PhoneGridItem = ({ phone }) => {
+const PhoneGridItem = ({ phone, classes }) => {
   const dispatch = useDispatch();
 
   return (
-    <Paper className="phone-item" elevation={2} key={phone.id}>
+    <Paper
+      className="phone-item"
+      style={{ padding: "10px", height: "500px" }}
+      elevation={2}
+      key={phone.id}
+    >
       <div
         className="phone-item--box"
         style={{
@@ -40,18 +47,32 @@ const PhoneGridItem = ({ phone }) => {
           <p className="price">${phone.price}</p>
         </div>
         <Typography className="description">
-          {phone.description.substring(0, 53)}...
+          {phone.description.substring(0, 20)}...
         </Typography>
       </div>
-      <div className="buttons">
-        <AddToCart phone={phone} />
-        <Button variant="contained">
+      <div
+        className="buttons"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Button
+          variant="contained"
+          color="default"
+          className={classes.button}
+          endIcon={<ShoppingCartIcon />}
+          onClick={() => dispatch(addToCart(phone.id))}
+        >
+          Add
+        </Button>
+        <Button variant="contained" className={classes.button}>
           <Link
             to={`/phones/${phone.id}`}
             className="more-info"
-            onClick={() => dispatch(clearFilters())}
+            style={{ textDecoration: "none" }}
           >
-            More Info
+            {"More Info"}
           </Link>
         </Button>
       </div>
@@ -59,4 +80,4 @@ const PhoneGridItem = ({ phone }) => {
   );
 };
 
-export default PhoneGridItem;
+export default withStyles(homeStyle)(PhoneGridItem);
